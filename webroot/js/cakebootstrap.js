@@ -1,5 +1,5 @@
 /*
-* Twitter Bootstrappifier for CakePHP 
+* Twitter Bootstrappifier for CakePHP
 *
 * Author: Mutlu Tevfik Kocak
 *
@@ -9,6 +9,20 @@
 * and converts them into pretty Twitter Bootstrap style.
 *
 */
+
+jQuery.fn.swap = function(b) {
+    b = jQuery(b)[0];
+    var a = this[0],
+        a2 = a.cloneNode(true),
+        b2 = b.cloneNode(true),
+        stack = this;
+
+    a.parentNode.replaceChild(b2, a);
+    b.parentNode.replaceChild(a2, b);
+
+    stack[0] = a2;
+    return this.pushStack( stack );
+};
 
 var Bootstrappifier = {
 	straps		: {
@@ -36,6 +50,46 @@ var Bootstrappifier = {
 			//$('div.error-message').append($('div.error-message').replaceWith('<span class="help-inline">'+$('div.error-message').text()+'</span'));
 			$('.form-error').addClass('error');
 			$('.form-error').closest('.clearfix').addClass('error');
+		},
+		layout	: function() {
+			var $actions = $('div.actions');
+			var $index = $actions.siblings('div.index, div.view, div.form');
+			
+			if(!$index.length) {
+				return false;
+			}
+
+			$actions
+				.addClass('span1')
+				.find('a')
+					.addClass('btn btn-primary btn-large')
+					.css('margin-bottom', '20px');
+
+			$index
+				.addClass('span11');
+
+			
+		},
+		paging	: function() {
+			$('div.paging > span.prev, div.paging > span.next').addClass('btn');
+		},
+		table	: function() {
+			$('table').addClass('table table-striped');
+		},
+		heading	: function() {
+			$headers = $(
+				'div.index h1, div.actions h1, div.index h2, div.actions h2, div.index h3, div.actions h3, div.form legend'
+			);
+			$headers.each(function() {
+				var $heading   = $(this);
+				var headerHtml = '<div class="swap page-header"><h1>' + $heading.text() + '</h1></div>';
+
+				$heading.after(headerHtml).remove();
+			});
+		},
+		lists	: function() {
+			$('ul').addClass('unstyled');
+			$('dl').addClass('dl-horizontal');
 		}
 	},
 	getStraps	: function() {
@@ -54,9 +108,5 @@ var Bootstrappifier = {
 				strapFunction();
 			}
 		}) ? true : false;
-	},
-}
-//Styling start when document loads
-$(document).ready(function(){
-	Bootstrappifier.load();
-});
+	}
+};

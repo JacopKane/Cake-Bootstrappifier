@@ -33,6 +33,4 @@ The master branch has the following requirements:
 	));
 	echo $this->Html->css(array('bootstrap'));
 ?>
-```	
-### Contact
-* For any question mtkocak@gmail.com
+```
