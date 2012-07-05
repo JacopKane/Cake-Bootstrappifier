@@ -27,6 +27,7 @@ The master branch has the following requirements:
 * Example layout configuration:
 ```
 
+```php
 <?php
 	echo $this->Html->script(array(
 		'https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js',
@@ -43,5 +44,4 @@ echo $this->Html->scriptBlock('
 	});
 ');
 ?>
-
 ```
