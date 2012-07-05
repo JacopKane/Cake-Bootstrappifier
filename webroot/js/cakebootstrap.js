@@ -68,7 +68,6 @@ var Bootstrappifier = {
 			$index
 				.addClass('span11');
 
-			
 		},
 		paging	: function() {
 			$('div.paging > span.prev, div.paging > span.next').addClass('btn');
